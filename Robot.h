@@ -10,19 +10,19 @@ class TrashCan;
 class Robot
 {
 	public:
+	    friend World;
 
-	     Robot(){}
-
+        Robot(){}
 		virtual ~Robot();
 
+        ///will get Called once every turn.
         virtual void turn(){}
-        void update();
 
-
-		void begin ( World* world );
-
-
+        ///returns your current position
 		pg::Coord getPosition();
+
+		///returns map boundary. not that you cant get out of these boundaries
+		/// even if you try
 		int getMapWidth();
 		int getMapHeight();
 
@@ -32,6 +32,10 @@ class Robot
 		/**< returns the coordenate to the thrashcan of type */
 		pg::Coord getTrashCan ( TrashTypes );
 
+
+		 ///Returns a Trash if there is a Trash in your square, otherwise returns 0
+		Trash* scan();
+
 		/** interactThrash
 		 * interacts with the thrash around you.
 		 * will pick up anythrash in your spot if you are holding nothing;
@@ -39,12 +43,14 @@ class Robot
 		 * will swap your current thrash with the one on the ground if there is something in the ground
 		 * will do nothing otherwise
 		 */
+		///only one of these actions below can be executed per turn. If more than one is called
+		/// it will overwrite the last
 		void interactThrash();
-		Trash* scan();
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
+
 
 	protected:
 
@@ -61,7 +67,10 @@ class Robot
             INTERACT,
             NOTHING
 	    };
-	    friend World;
+
+
+		void begin ( World* world );
+	    void update();
 
 	    World* _world;
 	    Trash* _carrying;
