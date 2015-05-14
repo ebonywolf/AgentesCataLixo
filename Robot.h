@@ -34,7 +34,7 @@ class Robot
 
 
 		 ///Returns a Trash if there is a Trash in your square, otherwise returns 0
-		Trash* scan();
+		 Trash* scan();
 
 		/** interactThrash
 		 * interacts with the thrash around you.

@@ -3,10 +3,12 @@
 
 #include <ProjGaia/SFML/HollowShape.h>
 #include <ProjGaia/SFML/DrawableObject.h>
-//#include <ProjGaia/Tools/Coord.h>
+
+
 #define ROBOT_POS_OFFSET Coord(10,4)
-#define TRASH_POS_OFFSET Coord(10,4)
-#define CAN_POS_OFFSET Coord(10,4)
+#define TRASH_POS_OFFSET Coord(15,16)
+#define CAN_POS_OFFSET Coord(1,4)
+
 using namespace pg;
 GuiWorld::GuiWorld ( std::list<Robot*> robots, pg::Coord size ) : World ( robots, size )
 {
@@ -37,10 +39,10 @@ void GuiWorld::ini(){
     render->addDrawable ( this );
 
 	for ( auto x : trashCans ) {
-	//	render->addDrawable ( drawableCan[x] );
+		render->addDrawable ( drawableCan[x] );
 	}
 	for ( auto x : trash ) {
-	//	render->addDrawable ( drawableTrash[x] );
+		render->addDrawable ( drawableTrash[x] );
 	}
 	for ( auto x : robots ) {
 		render->addDrawable ( drawableRobot[x] );
@@ -49,11 +51,19 @@ void GuiWorld::ini(){
 
 }
 
+void GuiWorld::destroyTrash(Trash* t){
+    DrawableType* d = drawableTrash[t];
+    render->removeDrawable(d);
+    delete(d);
+    World::destroyTrash(t);
+
+
+}
 void  GuiWorld::generateTrash()
 {
 	World::generateTrash();
 	for ( auto x : trash ) {
-		DrawableObject<Trash>* novo = new DrawableObject<Trash> ( *x, GuiFactory::createTrashSprite() );
+		DrawableObject<Trash>* novo = new DrawableObject<Trash> ( *x, GuiFactory::createTrashSprite(x->type) );
 		drawableTrash[x] = novo;
 	}
 
@@ -62,7 +72,7 @@ void GuiWorld::createTrashCans()
 {
 	World::createTrashCans();
 	for ( auto x : trashCans ) {
-		DrawableObject<TrashCan>* novo = new DrawableObject<TrashCan> ( *x, GuiFactory::createCanSprite() );
+		DrawableObject<TrashCan>* novo = new DrawableObject<TrashCan> ( *x, GuiFactory::createCanSprite(x->type) );
 		drawableCan[x] = novo;
 	}
 
@@ -80,7 +90,7 @@ void GuiWorld::updateGraphicCoords()
         Coord pos=t->getPosition();
 		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y )+TRASH_POS_OFFSET;
 
-	//	drawableTrash[t]->getSprite()->getHitBox()->position = gcoord;
+		drawableTrash[t]->getSprite()->getHitBox()->position = gcoord;
 	}
 	for ( auto t : robots ) {
 		Coord pos=t->getPosition();
@@ -93,7 +103,7 @@ void GuiWorld::updateGraphicCoords()
 		Coord pos=t->getPosition();
 		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y )+CAN_POS_OFFSET;
 
-		//drawableCan[t]->getSprite()->getHitBox()->position = gcoord;
+		drawableCan[t]->getSprite()->getHitBox()->position = gcoord;
 	}
 
 }

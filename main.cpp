@@ -9,6 +9,7 @@
 #include <ProjGaia/Tools/Coord.h>
 #include <ProjGaia/Tools/HitBox.h>
 #include "Factory.h"
+#include <time.h>
 using namespace std;
 using namespace pg;
 struct A{
@@ -36,16 +37,24 @@ struct B: public A{
 
 int main()
 {
+    GuiFactory::setColorCodes();
+
+    srand(time(0));
+
     std::list<Robot*> robo=Factory::createRobots();
    World* world = new GuiWorld(robo,Coord(10,10));
     world->begin();
 
-   /*
+
+/*
    Renderer rend= Renderer("test",new Camera(),Coord(600,600),Coord(600,600));
-   DrawableSprite* t =GuiFactory::createRobotSprite();
-rend.addDrawable(t);
-rend.beginAssync();
-while(true);*/
+   DrawableSprite* t =GuiFactory::createCanSprite(TrashTypes::PAPEL);
+   t->getHitBox()->position.x=200;
+    t->getHitBox()->position.y=200;
+    rend.addDrawable(t);
+    rend.beginAssync();
+    while(true);
+    */
 
 
 

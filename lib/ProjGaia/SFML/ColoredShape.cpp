@@ -51,7 +51,7 @@ for ( auto line: lines ) {
 	shape = shape2;
 
 }
-void ColoredShape::update() {
+void ColoredShape::update(void*) {
 	shape->setPosition ( hitbox->position.x, hitbox->position.y );
 
 

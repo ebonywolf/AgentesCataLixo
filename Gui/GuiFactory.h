@@ -7,6 +7,8 @@
 #include "Robot.h"
 #include <ProjGaia/SFML/DrawableObject.h>
 #include <ProjGaia/SFML/DrawableSprite.h>
+#include "TrashTypes.h"
+#include <unordered_map>
 #include <list>
 
 #define SIZE_X 50
@@ -17,17 +19,21 @@ class GuiFactory
 {
     public:
 
-        GuiFactory();
+        GuiFactory()=delete;
 
 //        static createWorld();
         static pg::DrawableSprite* createRobotSprite();
-        static pg::DrawableSprite* createTrashSprite(){return 0;};
-         static pg::DrawableSprite* createCanSprite(){return 0;};
+        static pg::DrawableSprite* createTrashSprite(TrashTypes);
+         static pg::DrawableSprite* createCanSprite(TrashTypes);
         static std::list<sf::Drawable*> getGroundTextures();
         static pg::Polygon createRect(pg::Coord dimension, pg::Coord position);
         virtual ~GuiFactory();
+        static std::map<TrashTypes,sf::Color> colorCodes;
+        static void setColorCodes();
     protected:
         static sf::Texture* robot;
+
+
     private:
 };
 

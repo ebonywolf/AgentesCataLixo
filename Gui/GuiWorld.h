@@ -24,6 +24,7 @@ class GuiWorld: public pg::DrawableType, public World
 		virtual   void generateTrash();
 		virtual   void createTrashCans();
 		virtual   void updateAgents();
+        void destroyTrash(Trash*);
 		void ini();
 		void turn();
         void updateGraphicCoords();

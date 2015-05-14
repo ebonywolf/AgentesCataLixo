@@ -12,12 +12,16 @@ class World
 		World() = default;
 		World ( std::list<Robot*> robots, pg::Coord size, int trashNum = 20 );
 		virtual ~World();
-
 		void begin();
 
 
 		pg::Coord size;
 		TrashCan * canByType ( TrashTypes t );
+		Trash* getTrash(pg::Coord);
+		void pickTrash(Robot*, Trash*);
+		void dropTrash(Trash*);
+
+
 
 	protected:
         virtual  void ini();
@@ -25,6 +29,8 @@ class World
 		virtual   void generateTrash();
 		virtual   void createTrashCans();
 		virtual   void updateAgents();
+		virtual void updateCans();
+		virtual void destroyTrash(Trash*);
 		virtual   void turn();
 		std::list<Robot*> robots;
 		std::list<Trash*> trash;

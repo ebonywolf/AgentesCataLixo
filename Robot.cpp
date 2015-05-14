@@ -9,12 +9,12 @@ Robot::~Robot()
 void Robot::begin ( World* world )
 {
 	this->_world = world;
-//TODO : robot begin
+
 }
 
 void Robot::update()
 {
-	//TODO: Commit turn actions.
+
 	switch ( action ) {
 		case MOVE_UP: {
 				if ( _pos.y < _world->size.y-1 ) {
@@ -41,8 +41,31 @@ void Robot::update()
 				break;
 			}
 		case INTERACT: {
+		    /* interacts with the thrash around you.
+            * will pick up any trash in your spot if you are holding nothing;
+            * will drop any thrash in the ground if the spot is empty and you are holding something
+            * will swap your current thrash with the one on the ground if there is something in the ground
+            * will do nothing otherwise
+            */
+            Trash* scanned=scan();
+		    if(_carrying ==0 && scanned!=0){
+                _world->pickTrash(this,scanned);
+                _carrying=scanned;
+                break;
+		    }
+		    if(_carrying!=0 && scanned==0){
 
-				break;
+                _world->dropTrash(_carrying);
+                _carrying=0;
+                break;
+		    }
+		     if(_carrying !=0 && scanned!=0){
+                _world->dropTrash(_carrying);
+                _world->pickTrash(this,scanned);
+                _carrying=scanned;
+                break;
+		    }
+
 			}
 		default:
 			break;
@@ -77,21 +100,22 @@ pg::Coord Robot::getTrashCan ( TrashTypes t )
 	return aux->getPosition();
 }
 
-Trash * Robot::scan()
+ Trash* Robot::scan()
 {
-	//TODO: Verifica se há lixo no espaço atual.
+
+	Trash* t=_world->getTrash(_pos);
+	return t;
+
 }
 
 int Robot::getMapWidth()
 {
-	//TODO: perguntar a largura do mapa ao mundo.
 	int width = _world->size.x;
 	return width;
 }
 
 int Robot::getMapHeight()
 {
-
 	int height = _world->size.y;
 	return height;
 }
@@ -107,7 +131,7 @@ pg::Coord Robot::getPosition()
 }
 void Robot::interactThrash()
 {
-	//TODO: Interagir com o lixo carregado como tal:
+
 	action = INTERACT;
 	/* interacts with the thrash around you.
 	* will pick up any trash in your spot if you are holding nothing;

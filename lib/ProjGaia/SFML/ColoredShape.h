@@ -18,7 +18,7 @@ class ColoredShape: public DrawableSprite
 		ColoredShape ( sf::Shape* );
 		ColoredShape ( pg::Polygon , pg::Coord position, pg::Coord scale, float rotation, float height, sf::Color );
 		/** Default destructor */
-		void update(void*){}
+		void update(void*);
 		virtual ~ColoredShape();
 
 		static ColoredShape createSquare(pg::Coord dimension, pg::Coord position, sf::Color);
