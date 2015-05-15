@@ -2,16 +2,17 @@
 #define NEEDSUPDATE_H
 
 
-namespace pg{
-class NeedsUpdate
+namespace pg
 {
-	public:
+	class NeedsUpdate
+	{
+		public:
 
-		/** Default destructor */
-		virtual ~NeedsUpdate()=default;
-		virtual void update ( void* arg ) = 0;
-	protected:
-	private:
-};
+			/** Default destructor */
+			virtual ~NeedsUpdate() = default;
+			virtual void update ( void* arg ) = 0;
+		protected:
+		private:
+	};
 }
 #endif // NEEDSUPDATE_H

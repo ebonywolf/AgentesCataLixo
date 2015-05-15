@@ -1,5 +1,6 @@
 #include "World.h"
 #include <stdlib.h>
+
 using namespace pg;
 static Coord randomCoord ( Coord limit )
 {
@@ -43,23 +44,10 @@ World::World ( std::list<Robot*> robots, pg::Coord size, int trashNum ) :
 	size ( size ), trashAmount ( trashNum ), robots ( robots )
 {
 
-
-
 }
 
 World::~World()
 {
-
-}
-
-void World::ini()
-{
-	createTrashCans();
-	generateTrash();
-	for ( auto x : robots ) {
-		x->_pos = randomCoord ( size );
-		x->begin ( this );
-	}
 
 }
 void World::begin()
@@ -70,46 +58,69 @@ void World::begin()
 	}
 
 }
+
+void World::ini()
+{
+    turnCont=0;
+	createTrashCans();
+	generateTrash();
+	for ( auto x : robots ) {
+		x->_pos = randomCoord ( size );
+		x->begin ( this );
+	}
+
+}
+
 void World::turn()
 {
+    turnCont++;
+    updateAgents();
+
+///Update carried trash location to the carrier location
 	for ( Trash* t : trash ) {
 		if ( t->carrier != 0 ) {
 			t->_pos = t->carrier->_pos;
 		}
 	}
 	updateCans();
-	updateAgents();
+
 }
 bool  World::checkVictoryCondition()
 {
-	if(trashAmount>0)return false;
+	if ( trashAmount > 0 ) { return false; }
 	return true;
 
 
 }
-void World::updateCans(){
-    for(auto x: trashCans){
-            Trash* t= getTrash(x->getPosition());
-            if(t!=0){
-                if(t->type == x->type){
-                    destroyTrash(t);
-                }
-            }
-    }
+void World::updateCans()
+{
+    ///update every trashcan
+    ///if one of them sees a trash of their type in their position,
+    /// the trash will be destroyed
+	for ( auto x : trashCans ) {
+		Trash* t = getTrash ( x->getPosition() );
+		if ( t != 0 ) {
+			if ( t->type == x->type ) {
+				destroyTrash ( t );
+			}
+		}
+	}
 }
 void World::generateTrash()
 {
+    ///generate trash in random positions
 	for ( int i = 0; i < trashAmount; i++ ) {
 		Coord c = randomCoord ( size );
 		TrashTypes type = randomType();
 		trash.push_back ( new Trash ( type, c ) );
 	}
 }
-Trash* World::getTrash ( pg::Coord pos ){
-
+Trash* World::getTrash ( pg::Coord pos )
+{
+///get the first trash it finds in a determined position
 	for ( auto x : trash ) {
 		if ( x->getPosition() == pos && x->carrier == 0 ) {
-            return x;
+			return x;
 		}
 	}
 	return 0;
@@ -123,10 +134,11 @@ void World::dropTrash ( Trash* t )
 {
 	t->carrier = 0;
 }
-void World::destroyTrash(Trash* t){
-    trash.remove(t);
-    delete(t);
-    trashAmount--;
+void World::destroyTrash ( Trash* t )
+{
+	trash.remove ( t );
+	delete ( t );
+	trashAmount--;
 
 }
 
@@ -153,6 +165,7 @@ void World::createTrashCans()
 
 TrashCan * World::canByType ( TrashTypes t )
 {
+    ///returns the position of the first trashcan of type T
 	for ( auto cesto : trashCans ) {
 		if ( cesto->type == t ) {
 			return cesto;

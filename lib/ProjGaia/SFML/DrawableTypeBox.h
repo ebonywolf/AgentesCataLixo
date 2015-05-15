@@ -8,20 +8,20 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 
-class DrawableTypeBox:public pg::DrawableSprite,public TypeBox
+class DrawableTypeBox: public pg::DrawableSprite, public TypeBox
 {
-    public:
+	public:
 
-        DrawableTypeBox(sf::Font *font,pg::Coord coord);
+		DrawableTypeBox ( sf::Font *font, pg::Coord coord );
 
-        virtual ~DrawableTypeBox();
+		virtual ~DrawableTypeBox();
 
-        void update(void*);
-        void draw ( sf::RenderTarget&, sf::RenderStates )const ;
+		void update ( void* );
+		void draw ( sf::RenderTarget&, sf::RenderStates ) const ;
 
-    protected:
-        sf::Text text;
-    private:
+	protected:
+		sf::Text text;
+	private:
 };
 
 #endif // DRAWABLETYPEBOX_H

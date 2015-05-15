@@ -5,20 +5,22 @@
 #include "iostream"
 #define String std::string
 
-namespace pg{
-class Text: public DrawableType {
-	public:
-		/** Default constructor */
-		Text ( String text, float size, String font, pg::Coord pos );
-		/** Default destructor */
-		virtual ~Text();
-		float size;
-		String text, font;
-		pg::Coord pos;
-	protected:
+namespace pg
+{
+	class Text: public DrawableType
+	{
+		public:
+			/** Default constructor */
+			Text ( String text, float size, String font, pg::Coord pos );
+			/** Default destructor */
+			virtual ~Text();
+			float size;
+			String text, font;
+			pg::Coord pos;
+		protected:
 
-	private:
-};
+		private:
+	};
 }
 
 #endif // TEXT_H

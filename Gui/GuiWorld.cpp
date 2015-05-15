@@ -3,17 +3,21 @@
 
 #include <ProjGaia/SFML/HollowShape.h>
 #include <ProjGaia/SFML/DrawableObject.h>
-
+#include <ProjGaia/Tools/KeyBoardEvent.h>
+#include <ProjGaia/Tools/Listener.h>
 
 #define ROBOT_POS_OFFSET Coord(10,4)
 #define TRASH_POS_OFFSET Coord(15,16)
 #define CAN_POS_OFFSET Coord(1,4)
 
 using namespace pg;
-GuiWorld::GuiWorld ( std::list<Robot*> robots, pg::Coord size ) : World ( robots, size )
+GuiWorld::GuiWorld ( std::list<Robot*> robots, pg::Coord size,int trashNum, pg::Listener<pg::KeyBoardEvent>* kbreader ) : World ( robots, size ,trashNum)
 {
 	sprite = new MultiSprite();
 	render = new Renderer ( "CataLixo", new Camera(), WINDOW_SIZE, WINDOW_SIZE );
+	if(kbreader!=0){
+        render->KeyBoardReader::addListener(kbreader);
+	}
 
 //    sprites=GuiFactory::getGroundTextures();
 	for ( int i = 0; i < size.x; i++ ) {
@@ -34,28 +38,31 @@ GuiWorld::GuiWorld ( std::list<Robot*> robots, pg::Coord size ) : World ( robots
 
 	}
 }
-void GuiWorld::ini(){
-    World::ini();
-    render->addDrawable ( this );
+void GuiWorld::ini()
+{
+	World::ini();
+	render->addDrawable ( this );
 
 	for ( auto x : trashCans ) {
 		render->addDrawable ( drawableCan[x] );
 	}
-	for ( auto x : trash ) {
-		render->addDrawable ( drawableTrash[x] );
-	}
+
 	for ( auto x : robots ) {
 		render->addDrawable ( drawableRobot[x] );
+	}
+	for ( auto x : trash ) {
+		render->addDrawable ( drawableTrash[x] );
 	}
 	render->beginAssync();
 
 }
 
-void GuiWorld::destroyTrash(Trash* t){
-    DrawableType* d = drawableTrash[t];
-    render->removeDrawable(d);
-    delete(d);
-    World::destroyTrash(t);
+void GuiWorld::destroyTrash ( Trash* t )
+{
+	DrawableType* d = drawableTrash[t];
+	render->removeDrawable ( d );
+	delete ( d );
+	World::destroyTrash ( t );
 
 
 }
@@ -63,7 +70,7 @@ void  GuiWorld::generateTrash()
 {
 	World::generateTrash();
 	for ( auto x : trash ) {
-		DrawableObject<Trash>* novo = new DrawableObject<Trash> ( *x, GuiFactory::createTrashSprite(x->type) );
+		DrawableObject<Trash>* novo = new DrawableObject<Trash> ( *x, GuiFactory::createTrashSprite ( x->type ) );
 		drawableTrash[x] = novo;
 	}
 
@@ -72,7 +79,7 @@ void GuiWorld::createTrashCans()
 {
 	World::createTrashCans();
 	for ( auto x : trashCans ) {
-		DrawableObject<TrashCan>* novo = new DrawableObject<TrashCan> ( *x, GuiFactory::createCanSprite(x->type) );
+		DrawableObject<TrashCan>* novo = new DrawableObject<TrashCan> ( *x, GuiFactory::createCanSprite ( x->type ) );
 		drawableCan[x] = novo;
 	}
 
@@ -80,28 +87,27 @@ void GuiWorld::createTrashCans()
 }
 void  GuiWorld::updateAgents()
 {
-    World::updateAgents();
+	World::updateAgents();
 
 }
 void GuiWorld::updateGraphicCoords()
 {
 
 	for ( auto t : trash ) {
-        Coord pos=t->getPosition();
-		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y )+TRASH_POS_OFFSET;
+		Coord pos = t->getPosition();
+		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y ) + TRASH_POS_OFFSET;
 
 		drawableTrash[t]->getSprite()->getHitBox()->position = gcoord;
 	}
 	for ( auto t : robots ) {
-		Coord pos=t->getPosition();
-		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y )+ROBOT_POS_OFFSET;
+		Coord pos = t->getPosition();
+		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y ) + ROBOT_POS_OFFSET;
 
-		drawableRobot[t]->getSprite()->
-            getHitBox()->position = gcoord;
+		drawableRobot[t]->getSprite()->getHitBox()->position = gcoord;
 	}
 	for ( auto t : trashCans ) {
-		Coord pos=t->getPosition();
-		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y )+CAN_POS_OFFSET;
+		Coord pos = t->getPosition();
+		Coord gcoord = Coord ( pos.x * SIZE_X, pos.y * SIZE_Y ) + CAN_POS_OFFSET;
 
 		drawableCan[t]->getSprite()->getHitBox()->position = gcoord;
 	}
@@ -110,7 +116,7 @@ void GuiWorld::updateGraphicCoords()
 void GuiWorld::turn()
 {
 	updateGraphicCoords();
-	sf::sleep(sf::milliseconds(250));
+	sf::sleep ( sf::milliseconds ( 250 ) );
 	World::turn();
 
 }

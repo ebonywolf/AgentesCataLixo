@@ -2,7 +2,8 @@
 #define COORD_H
 #include <iostream>
 
-namespace pg {
+namespace pg
+{
 	class Coord
 	{
 		public:

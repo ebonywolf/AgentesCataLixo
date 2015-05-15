@@ -16,7 +16,7 @@ class GuiWorld: public pg::DrawableType, public World
 	public:
 
 
-		GuiWorld ( std::list<Robot*> robots, pg::Coord size );
+		GuiWorld ( std::list<Robot*> robots, pg::Coord size=pg::Coord(10,10),int trashNum =50, pg::Listener<pg::KeyBoardEvent>* kbreader=0 );
 		virtual ~GuiWorld();
 
 		pg::Sprite* getSprite() {return sprite;}
@@ -24,10 +24,10 @@ class GuiWorld: public pg::DrawableType, public World
 		virtual   void generateTrash();
 		virtual   void createTrashCans();
 		virtual   void updateAgents();
-        void destroyTrash(Trash*);
+		void destroyTrash ( Trash* );
 		void ini();
 		void turn();
-        void updateGraphicCoords();
+		void updateGraphicCoords();
 
 		pg::Renderer* render;
 		std::vector<sf::Drawable*> textures;

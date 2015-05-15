@@ -2,7 +2,8 @@
 #define LINESEG_H
 #include "Coord.h"
 
-namespace pg {
+namespace pg
+{
 	class LineSeg
 	{
 

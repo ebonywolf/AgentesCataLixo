@@ -5,26 +5,27 @@
 #include <mutex>
 //TODO :get it Working
 
-namespace pg{
-class TimedThread
+namespace pg
 {
-    public:
-        /** Default constructor */
-        TimedThread(void(*)(),int mili);
-        /** Default destructor */
-        virtual ~TimedThread();
-        void join();
+	class TimedThread
+	{
+		public:
+			/** Default constructor */
+			TimedThread ( void ( * ) (), int mili );
+			/** Default destructor */
+			virtual ~TimedThread();
+			void join();
 
-    protected:
+		protected:
 
-        void counter(int n);
-        std::thread* counterThread;
-        std::thread* watched;
+			void counter ( int n );
+			std::thread* counterThread;
+			std::thread* watched;
 
-        bool done=false;
-        std::mutex signal;//semaphore for the variable done
-    private:
-};
+			bool done = false;
+			std::mutex signal;//semaphore for the variable done
+		private:
+	};
 }
 
 

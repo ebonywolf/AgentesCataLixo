@@ -3,20 +3,21 @@
 #include <ProjGaia/Graphics/Sprite.h>
 #include <SFML/Graphics/Drawable.hpp>
 
-namespace pg{
-class DrawableSprite: public pg::Sprite, public sf::Drawable
+namespace pg
 {
-	public:
-		/** Default constructor */
-		DrawableSprite();
-		DrawableSprite(HitBox*);
-		DrawableSprite ( pg::Coord position, pg::Coord scale, float rotation, float height );
-		/** Default destructor */
-		virtual ~DrawableSprite();
-	protected:
-		void draw ( sf::RenderTarget&, sf::RenderStates ) const = 0 ;
+	class DrawableSprite: public pg::Sprite, public sf::Drawable
+	{
+		public:
+			/** Default constructor */
+			DrawableSprite();
+			DrawableSprite ( HitBox* );
+			DrawableSprite ( pg::Coord position, pg::Coord scale, float rotation, float height );
+			/** Default destructor */
+			virtual ~DrawableSprite();
+		protected:
+			void draw ( sf::RenderTarget&, sf::RenderStates ) const = 0 ;
 
-	private:
-};
+		private:
+	};
 }
 #endif // DRAWABLESPRITE_H

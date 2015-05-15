@@ -6,26 +6,28 @@
 #include "../Tools/NeedsUpdate.h"
 #include "../Tools/HasCollison.h"
 
-namespace pg {
-	class Sprite : public DrawableType, public NeedsUpdate,HasCollison
+namespace pg
+{
+	class Sprite : public DrawableType, public NeedsUpdate, HasCollison
 	{
 		public:
 
 
-			Sprite(HitBox*);
+			Sprite ( HitBox* );
 			/** Default constructor */
 			Sprite ( pg::Coord position, pg::Coord scale, float rotation, float height );
 
 			/** Default destructor */
 			virtual ~Sprite();
-			pg::HitBox* getHitBox(){return hitbox;}
+			pg::HitBox* getHitBox() {return hitbox;}
 
 
-			virtual Sprite* getSprite() {
+			virtual Sprite* getSprite()
+			{
 				return this;
 			}
 		protected:
-		    pg::HitBox* hitbox;
+			pg::HitBox* hitbox;
 
 		private:
 	};

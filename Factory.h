@@ -5,12 +5,12 @@
 #include "Robot.h"
 class Factory
 {
-    public:
+	public:
 
-        static std::list<Trash> createThrash(int mapWidth,int mapHeight);
-        static std::list<Robot*> createRobots();
-    protected:
-    private:
+		static std::list<Trash> createThrash ( int mapWidth, int mapHeight );
+		static std::list<Robot*> createRobots();
+	protected:
+	private:
 };
 
 #endif // FACTORY_H

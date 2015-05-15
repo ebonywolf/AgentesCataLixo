@@ -17,7 +17,7 @@ void Robot::update()
 
 	switch ( action ) {
 		case MOVE_UP: {
-				if ( _pos.y < _world->size.y-1 ) {
+				if ( _pos.y < _world->size.y - 1 ) {
 					_pos.y++;
 				}
 				break;
@@ -35,41 +35,42 @@ void Robot::update()
 				break;
 			}
 		case MOVE_RIGHT: {
-				if ( _pos.x < _world->size.x-1 ) {
+				if ( _pos.x < _world->size.x - 1 ) {
 					_pos.x++;
 				}
 				break;
 			}
 		case INTERACT: {
-		    /* interacts with the thrash around you.
-            * will pick up any trash in your spot if you are holding nothing;
-            * will drop any thrash in the ground if the spot is empty and you are holding something
-            * will swap your current thrash with the one on the ground if there is something in the ground
-            * will do nothing otherwise
-            */
-            Trash* scanned=scan();
-		    if(_carrying ==0 && scanned!=0){
-                _world->pickTrash(this,scanned);
-                _carrying=scanned;
-                break;
-		    }
-		    if(_carrying!=0 && scanned==0){
+				/* interacts with the thrash around you.
+				* will pick up any trash in your spot if you are holding nothing;
+				* will drop any thrash in the ground if the spot is empty and you are holding something
+				* will swap your current thrash with the one on the ground if there is something in the ground
+				* will do nothing otherwise
+				*/
+				Trash* scanned = scan();
+				if ( _carrying == 0 && scanned != 0 ) {
+					_world->pickTrash ( this, scanned );
+					_carrying = scanned;
+					break;
+				}
+				if ( _carrying != 0 && scanned == 0 ) {
 
-                _world->dropTrash(_carrying);
-                _carrying=0;
-                break;
-		    }
-		     if(_carrying !=0 && scanned!=0){
-                _world->dropTrash(_carrying);
-                _world->pickTrash(this,scanned);
-                _carrying=scanned;
-                break;
-		    }
+					_world->dropTrash ( _carrying );
+					_carrying = 0;
+					break;
+				}
+				if ( _carrying != 0 && scanned != 0 ) {
+					_world->dropTrash ( _carrying );
+					_world->pickTrash ( this, scanned );
+					_carrying = scanned;
+					break;
+				}
 
 			}
 		default:
 			break;
 	}
+	action=NOTHING;
 
 }
 
@@ -100,10 +101,10 @@ pg::Coord Robot::getTrashCan ( TrashTypes t )
 	return aux->getPosition();
 }
 
- Trash* Robot::scan()
+Trash* Robot::scan()
 {
 
-	Trash* t=_world->getTrash(_pos);
+	Trash* t = _world->getTrash ( _pos );
 	return t;
 
 }

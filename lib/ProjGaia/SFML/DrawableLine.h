@@ -6,17 +6,18 @@
 
 #include "ColoredShape.h"
 
-namespace pg{
-class DrawableLine: public ColoredShape
+namespace pg
 {
-	public:
-		DrawableLine ( pg::LineSeg*, sf::Color );
-		void update();
+	class DrawableLine: public ColoredShape
+	{
+		public:
+			DrawableLine ( pg::LineSeg*, sf::Color );
+			void update();
 
-		virtual ~DrawableLine();
-	protected:
-		pg::LineSeg* line;
-	private:
-};
+			virtual ~DrawableLine();
+		protected:
+			pg::LineSeg* line;
+		private:
+	};
 }
 #endif // DRAWABLELINE_H

@@ -1,14 +1,15 @@
 #include "TrashCan.h"
 
-TrashCan::TrashCan(TrashTypes type,pg::Coord pos):type(type),_pos(pos)
+TrashCan::TrashCan ( TrashTypes type, pg::Coord pos ) : type ( type ), _pos ( pos )
 {
-    //ctor
+	//ctor
 }
 TrashCan::~TrashCan()
 {
-    //dtor
+	//dtor
 }
 
-pg::Coord TrashCan::getPosition(){
-    return this->_pos;
+pg::Coord TrashCan::getPosition()
+{
+	return this->_pos;
 }

@@ -1,13 +1,14 @@
 #include "Actor.h"
 
-namespace pg{
-Actor::Actor()
+namespace pg
 {
+	Actor::Actor()
+	{
 
-}
+	}
 
-Actor::~Actor()
-{
-	//dtor
-}
+	Actor::~Actor()
+	{
+		//dtor
+	}
 }

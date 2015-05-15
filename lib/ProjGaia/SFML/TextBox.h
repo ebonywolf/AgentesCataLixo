@@ -8,24 +8,25 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <iostream>
-namespace pg{
-class TextBox:public pg::DrawableSprite
+namespace pg
 {
-    public:
-        TextBox(pg::Coord dimension, pg::Coord pos,
-                   sf::Color color, sf::Font* font, std::string text,
-                   sf::Color textColor= sf::Color ( 255, 255, 255 ));
+	class TextBox: public pg::DrawableSprite
+	{
+		public:
+			TextBox ( pg::Coord dimension, pg::Coord pos,
+			          sf::Color color, sf::Font* font, std::string text,
+			          sf::Color textColor = sf::Color ( 255, 255, 255 ) );
 
-        virtual ~TextBox();
-        void update(void*);
-        void draw ( sf::RenderTarget&, sf::RenderStates )const ;
+			virtual ~TextBox();
+			void update ( void* );
+			void draw ( sf::RenderTarget&, sf::RenderStates ) const ;
 
 
-    protected:
-        pg::ColoredShape* box;
-        sf::Text* text;
+		protected:
+			pg::ColoredShape* box;
+			sf::Text* text;
 
-    private:
-};
+		private:
+	};
 }
 #endif // TEXTBOX_H

@@ -17,26 +17,28 @@ class World
 
 		pg::Coord size;
 		TrashCan * canByType ( TrashTypes t );
-		Trash* getTrash(pg::Coord);
-		void pickTrash(Robot*, Trash*);
-		void dropTrash(Trash*);
+		Trash* getTrash ( pg::Coord );
+		virtual void pickTrash ( Robot*, Trash* );
+		virtual void dropTrash ( Trash* );
 
 
 
 	protected:
-        virtual  void ini();
+		virtual   void ini();
 		virtual   bool checkVictoryCondition();
 		virtual   void generateTrash();
 		virtual   void createTrashCans();
 		virtual   void updateAgents();
-		virtual void updateCans();
-		virtual void destroyTrash(Trash*);
+		virtual   void updateCans();
+		virtual   void destroyTrash ( Trash* );
 		virtual   void turn();
+
 		std::list<Robot*> robots;
 		std::list<Trash*> trash;
 		std::list<TrashCan*> trashCans;
 
 		int trashAmount;
+		long int turnCont = 0 ;
 
 
 

@@ -28,8 +28,9 @@ void TypeBox::notify ( char k )
 		phrase.resize ( phrase.length() - 1 );
 
 	} else {
-	    if(k>15)
-		phrase += k;
+		if ( k > 15 ) {
+			phrase += k;
+		}
 	}
 	phrase += '_';
 

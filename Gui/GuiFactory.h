@@ -17,25 +17,25 @@
 #define ROBOT_PATH "Img/Walle.png"
 class GuiFactory
 {
-    public:
+	public:
 
-        GuiFactory()=delete;
+		GuiFactory() = delete;
 
 //        static createWorld();
-        static pg::DrawableSprite* createRobotSprite();
-        static pg::DrawableSprite* createTrashSprite(TrashTypes);
-         static pg::DrawableSprite* createCanSprite(TrashTypes);
-        static std::list<sf::Drawable*> getGroundTextures();
-        static pg::Polygon createRect(pg::Coord dimension, pg::Coord position);
-        virtual ~GuiFactory();
+		static pg::DrawableSprite* createRobotSprite();
+		static pg::DrawableSprite* createTrashSprite ( TrashTypes );
+		static pg::DrawableSprite* createCanSprite ( TrashTypes );
+		static std::list<sf::Drawable*> getGroundTextures();
+		static pg::Polygon createRect ( pg::Coord dimension, pg::Coord position );
+		virtual ~GuiFactory();
 
-        static std::map<TrashTypes,sf::Color> colorCodes;
-        static void setColorCodes();
-    protected:
-        static sf::Texture* robot;
+		static std::map<TrashTypes, sf::Color> colorCodes;
+		static void setColorCodes();
+	protected:
+		static sf::Texture* robot;
 
 
-    private:
+	private:
 };
 
 #endif // GUIFACTORY_H

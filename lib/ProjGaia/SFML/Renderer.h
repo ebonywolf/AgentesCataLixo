@@ -23,53 +23,54 @@
 #include <thread>
 class NeedsUpdate;
 
-namespace pg{
-class Renderer : public WindowType,public PainterType, public MouseReader,public KeyBoardReader, public Observer<char>
+namespace pg
 {
-	public:
-		int dimX;
-		int dimY;
+	class Renderer : public WindowType, public PainterType, public MouseReader, public KeyBoardReader, public Observer<char>
+	{
+		public:
+			int dimX;
+			int dimY;
 
-		Renderer ( std::string window_name, Camera* camera , pg::Coord tam, pg::Coord dim );
-		pg::Coord getMouseCoord();
-		virtual ~Renderer();
-        int getWidth();
-        int getHeight();
-
-
-		void removeDrawable ( DrawableType* );
-		void addDrawable ( DrawableType* );
-		void addSync(NeedsUpdate*);
-		void begin();
-		void beginAssync();
-		void end();
-		std::list<sf::Drawable*> debugDraw = std::list<sf::Drawable*>();
-	protected:
-		void createMouseEvent ( sf::Event );
-		void createKeyBoardEvent ( sf::Event );
-        void createCharEvents(sf::Event);
+			Renderer ( std::string window_name, Camera* camera , pg::Coord tam, pg::Coord dim );
+			pg::Coord getMouseCoord();
+			virtual ~Renderer();
+			int getWidth();
+			int getHeight();
 
 
-		sf::RenderWindow* window;
-		std::list<DrawableType*> sprites = std::list<DrawableType*>();
-		std::list<NeedsUpdate*> syncList=std::list<NeedsUpdate*>();
-
-		void drawSprites();
-
-
-		Camera* camera;
-	private:
-	    std::thread* assync=0;
-
-	    std::string name;
-	    pg::Coord tam;
-
-	    bool active=false;
-		bool mouse[3] = {0, 0, 0}; //mouse timers
-		bool keyboard[100] = {0};
+			void removeDrawable ( DrawableType* );
+			void addDrawable ( DrawableType* );
+			void addSync ( NeedsUpdate* );
+			void begin();
+			void beginAssync();
+			void end();
+			std::list<sf::Drawable*> debugDraw = std::list<sf::Drawable*>();
+		protected:
+			void createMouseEvent ( sf::Event );
+			void createKeyBoardEvent ( sf::Event );
+			void createCharEvents ( sf::Event );
 
 
+			sf::RenderWindow* window;
+			std::list<DrawableType*> sprites = std::list<DrawableType*>();
+			std::list<NeedsUpdate*> syncList = std::list<NeedsUpdate*>();
 
-};
+			void drawSprites();
+
+
+			Camera* camera;
+		private:
+			std::thread* assync = 0;
+
+			std::string name;
+			pg::Coord tam;
+
+			bool active = false;
+			bool mouse[3] = {0, 0, 0}; //mouse timers
+			bool keyboard[100] = {0};
+
+
+
+	};
 }
 #endif // WINDOW_H

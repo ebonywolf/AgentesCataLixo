@@ -10,15 +10,15 @@ class TrashCan;
 class Robot
 {
 	public:
-	    friend World;
+		friend World;
 
-        Robot(){}
+		Robot() {}
 		virtual ~Robot();
 
-        ///will get Called once every turn.
-        virtual void turn(){}
+		///will get Called once every turn.
+		virtual void turn() {}
 
-        ///returns your current position
+		///returns your current position
 		pg::Coord getPosition();
 
 		///returns map boundary. not that you cant get out of these boundaries
@@ -33,8 +33,8 @@ class Robot
 		pg::Coord getTrashCan ( TrashTypes );
 
 
-		 ///Returns a Trash if there is a Trash in your square, otherwise returns 0
-		 Trash* scan();
+		///Returns a Trash if there is a Trash in your square, otherwise returns 0
+		Trash* scan();
 
 		/** interactThrash
 		 * interacts with the thrash around you.
@@ -59,23 +59,23 @@ class Robot
 
 
 	private:
-	    enum Actions{
-            MOVE_RIGHT,
-            MOVE_LEFT,
-            MOVE_DOWN,
-            MOVE_UP,
-            INTERACT,
-            NOTHING
-	    };
+		enum Actions {
+			MOVE_RIGHT,
+			MOVE_LEFT,
+			MOVE_DOWN,
+			MOVE_UP,
+			INTERACT,
+			NOTHING
+		};
 
 
 		void begin ( World* world );
-	    void update();
+		void update();
 
-	    World* _world;
-	    Trash* _carrying;
-	    pg::Coord _pos;
-	    Actions action;
+		World* _world;
+		Trash* _carrying;
+		pg::Coord _pos;
+		Actions action;
 
 
 };

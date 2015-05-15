@@ -2,20 +2,21 @@
 #define CAMERA_H
 #include "../Tools/Coord.h"
 //TODO :Camera field of view
-namespace pg{
-class Camera
+namespace pg
 {
-	public:
-		Camera();
-		virtual ~Camera();
+	class Camera
+	{
+		public:
+			Camera();
+			virtual ~Camera();
 
-		double zoom = 1;
-		double rotation = 0;
-		pg::Coord pos;
+			double zoom = 1;
+			double rotation = 0;
+			pg::Coord pos;
 
-	protected:
-	private:
-};
+		protected:
+		private:
+	};
 
 }
 #endif // CAMERA_H

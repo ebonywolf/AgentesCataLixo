@@ -1,14 +1,15 @@
 #include "Camera.h"
 
 
-namespace pg{
-Camera::Camera() : pos ( pg::Coord() )
+namespace pg
 {
+	Camera::Camera() : pos ( pg::Coord() )
+	{
 
-}
+	}
 
-Camera::~Camera()
-{
-	//dtor
-}
+	Camera::~Camera()
+	{
+		//dtor
+	}
 }

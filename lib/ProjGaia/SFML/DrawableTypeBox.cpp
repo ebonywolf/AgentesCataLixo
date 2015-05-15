@@ -1,13 +1,13 @@
 #include "DrawableTypeBox.h"
 #include <SFML/Graphics/RenderTarget.hpp>
 
-DrawableTypeBox::DrawableTypeBox ( sf::Font *font ,pg::Coord coord)
+DrawableTypeBox::DrawableTypeBox ( sf::Font *font , pg::Coord coord )
 {
 
 	text = sf::Text();
 	text.setFont ( *font );
-	text.setCharacterSize(18);
-    text.setPosition(coord.x,coord.y);
+	text.setCharacterSize ( 18 );
+	text.setPosition ( coord.x, coord.y );
 }
 
 DrawableTypeBox::~DrawableTypeBox()

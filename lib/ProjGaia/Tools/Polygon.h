@@ -7,9 +7,11 @@
 #include "HitBox.h"
 
 
-namespace pg {
+namespace pg
+{
 
-	class Polygon: public pg::HitBox	{
+	class Polygon: public pg::HitBox
+	{
 		public:
 			/** Default constructor */
 			Polygon() = default;

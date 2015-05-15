@@ -5,8 +5,10 @@
 
 #define PI 3.141592653589793238460
 
-namespace pg {
-	class Angle {
+namespace pg
+{
+	class Angle
+	{
 
 		public:
 

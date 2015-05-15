@@ -2,16 +2,17 @@
 #define SERIALIZE_H
 
 
-namespace pg{
-class Serialize
+namespace pg
 {
-	public:
+	class Serialize
+	{
+		public:
 
 
-		virtual ~Serialize();
-	protected:
-		Serialize();
-	private:
-};
+			virtual ~Serialize();
+		protected:
+			Serialize();
+		private:
+	};
 }
 #endif // SERIALIZE_H

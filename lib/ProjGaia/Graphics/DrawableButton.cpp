@@ -11,7 +11,8 @@ DrawableButton::~DrawableButton()
 {
 	//dtor
 }
-Sprite* DrawableButton::getSprite() {
+Sprite* DrawableButton::getSprite()
+{
 	switch ( state ) {
 		case ON:
 			return main ;

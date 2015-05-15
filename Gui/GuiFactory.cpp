@@ -5,41 +5,44 @@ using namespace pg;
 
 
 sf::Texture* GuiFactory::robot = 0;
- std::map<TrashTypes,sf::Color> GuiFactory::colorCodes= std::map<TrashTypes,sf::Color>();
+std::map<TrashTypes, sf::Color> GuiFactory::colorCodes = std::map<TrashTypes, sf::Color>();
 
 GuiFactory::~GuiFactory()
 {
 	//dtor
 }
-void GuiFactory::setColorCodes (){
+void GuiFactory::setColorCodes ()
+{
 	colorCodes[TrashTypes::ORGANICO] = sf::Color ( 136, 67, 67 );
 	colorCodes[TrashTypes::PAPEL] = sf::Color::Blue;
 	colorCodes[TrashTypes::PLASTICO] = sf::Color::Red;
 	colorCodes[TrashTypes::VIDRO] = sf::Color::Green;
 	colorCodes[TrashTypes::TOXICO] = sf::Color::Yellow;
 }
- pg::DrawableSprite* GuiFactory::createTrashSprite ( TrashTypes type){
+pg::DrawableSprite* GuiFactory::createTrashSprite ( TrashTypes type )
+{
 
-    sf::Shape* circle= new sf::CircleShape(10);
-    circle->setFillColor(colorCodes[type] );
-    pg::DrawableSprite* novo = new pg::ColoredShape(circle);
+	sf::Shape* circle = new sf::CircleShape ( 10 );
+	circle->setFillColor ( colorCodes[type] );
+	pg::DrawableSprite* novo = new pg::ColoredShape ( circle );
 
-    return novo;
+	return novo;
 }
-  pg::DrawableSprite* GuiFactory::createCanSprite ( TrashTypes t){
-    int top=15;
-    int bottom=5;
-    int height=30;
-    int offset=5;
-    std::list<Coord> lista;
-    lista.push_back(Coord(0+bottom,offset));
-    lista.push_back(Coord(SIZE_X-bottom,offset));
-    lista.push_back(Coord(SIZE_X-top,offset+height));
-    lista.push_back(Coord(0+top,offset+height));
+pg::DrawableSprite* GuiFactory::createCanSprite ( TrashTypes t )
+{
+	int top = 15;
+	int bottom = 5;
+	int height = 30;
+	int offset = 5;
+	std::list<Coord> lista;
+	lista.push_back ( Coord ( 0 + bottom, offset ) );
+	lista.push_back ( Coord ( SIZE_X - bottom, offset ) );
+	lista.push_back ( Coord ( SIZE_X - top, offset + height ) );
+	lista.push_back ( Coord ( 0 + top, offset + height ) );
 
-    pg::DrawableSprite* novo = new ColoredShape(lista,colorCodes[t]);
+	pg::DrawableSprite* novo = new ColoredShape ( lista, colorCodes[t] );
 
-    return novo;
+	return novo;
 
 }
 

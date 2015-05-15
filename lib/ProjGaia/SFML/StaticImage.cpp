@@ -1,7 +1,8 @@
 #include "StaticImage.h"
-namespace pg {
-StaticImage::~StaticImage()
+namespace pg
 {
-	delete ( sprite );
-}
+	StaticImage::~StaticImage()
+	{
+		delete ( sprite );
+	}
 }

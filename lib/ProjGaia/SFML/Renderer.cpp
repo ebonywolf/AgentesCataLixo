@@ -23,8 +23,8 @@ namespace pg
 		camera ( camera ), dimX ( dim.x ), dimY ( dim.y ), tam ( tam ), name ( name )
 
 	{
-	    window=0;
-	    assync=0;
+		window = 0;
+		assync = 0;
 
 	}
 
@@ -52,7 +52,7 @@ namespace pg
 		return x;
 
 	}
-	void Renderer::createCharEvents (Event event )
+	void Renderer::createCharEvents ( Event event )
 	{
 		if ( event.type == sf::Event::TextEntered ) {
 			if ( event.text.unicode < 128 ) {
@@ -241,11 +241,11 @@ namespace pg
 
 		for ( DrawableType * type : sprites ) {
 			DrawableSprite* s = ( DrawableSprite* ) type->getSprite();
-			if(s!=0){
-                s->update ( 0 );
-                window->draw ( *s );
-			}else{
-                std::cout<< "Attempting to draw null object" <<std::endl;
+			if ( s != 0 ) {
+				s->update ( 0 );
+				window->draw ( *s );
+			} else {
+				std::cout << "Attempting to draw null object" << std::endl;
 			}
 
 		}
