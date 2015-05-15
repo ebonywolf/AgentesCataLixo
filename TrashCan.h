@@ -1,6 +1,6 @@
 #ifndef TRASHCAN_H
 #define TRASHCAN_H
-#include <TrashTypes.h>
+#include "TrashTypes.h"
 #include <ProjGaia/Tools/Coord.h>
 class World;
 class TrashCan
