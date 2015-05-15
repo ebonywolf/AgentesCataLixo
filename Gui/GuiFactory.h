@@ -28,6 +28,7 @@ class GuiFactory
         static std::list<sf::Drawable*> getGroundTextures();
         static pg::Polygon createRect(pg::Coord dimension, pg::Coord position);
         virtual ~GuiFactory();
+
         static std::map<TrashTypes,sf::Color> colorCodes;
         static void setColorCodes();
     protected:
