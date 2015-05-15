@@ -56,6 +56,7 @@ void World::begin()
 	while ( !checkVictoryCondition() ) {
 		turn();
 	}
+	std::cout<< "Congratulations you have cleaned everything in "<<turnCont<<" turns"  <<std::endl;
 
 }
 
@@ -170,7 +171,7 @@ TrashCan * World::canByType ( TrashTypes t )
 		if ( cesto->type == t ) {
 			return cesto;
 		}
-		break;
+
 	}
 	return 0;
 }

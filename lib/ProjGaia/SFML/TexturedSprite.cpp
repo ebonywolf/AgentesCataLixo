@@ -6,6 +6,7 @@
 using namespace pg;
 TexturedSprite::TexturedSprite ( sf::Texture* texture, pg::Coord pos )
 {
+
 	hitbox->position = pos;
 	sprite = new sf::Sprite ( *texture );
 

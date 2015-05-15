@@ -16,11 +16,12 @@ class GuiWorld: public pg::DrawableType, public World
 	public:
 
 
-		GuiWorld ( std::list<Robot*> robots, pg::Coord size=pg::Coord(10,10),int trashNum =50, pg::Listener<pg::KeyBoardEvent>* kbreader=0 );
+		GuiWorld ( std::list<Robot*> robots, pg::Coord size=pg::Coord(10,10),int trashNum =50,int sleepTime=250, pg::Listener<pg::KeyBoardEvent>* kbreader=0 );
 		virtual ~GuiWorld();
 
 		pg::Sprite* getSprite() {return sprite;}
 	protected:
+	    int sleeptime;
 		virtual   void generateTrash();
 		virtual   void createTrashCans();
 		virtual   void updateAgents();

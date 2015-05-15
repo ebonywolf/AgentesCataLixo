@@ -9,6 +9,7 @@ Robot::~Robot()
 void Robot::begin ( World* world )
 {
 	this->_world = world;
+	init();
 
 }
 
@@ -103,8 +104,8 @@ pg::Coord Robot::getTrashCan ( TrashTypes t )
 
 Trash* Robot::scan()
 {
-
-	Trash* t = _world->getTrash ( _pos );
+Trash* t=0;
+    t = _world->getTrash ( _pos );
 	return t;
 
 }

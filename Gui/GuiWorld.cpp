@@ -8,27 +8,33 @@
 
 #define ROBOT_POS_OFFSET Coord(10,4)
 #define TRASH_POS_OFFSET Coord(15,16)
-#define CAN_POS_OFFSET Coord(1,4)
+#define CAN_POS_OFFSET Coord(10,1)
 
 using namespace pg;
-GuiWorld::GuiWorld ( std::list<Robot*> robots, pg::Coord size,int trashNum, pg::Listener<pg::KeyBoardEvent>* kbreader ) : World ( robots, size ,trashNum)
+GuiWorld::GuiWorld ( std::list<Robot*> robots, pg::Coord size,int trashNum,int sleeptime, pg::Listener<pg::KeyBoardEvent>* kbreader ) :
+    World ( robots, size ,trashNum),sleeptime(sleeptime)
 {
+    Coord renderSize=Coord(SIZE_X*size.x,SIZE_Y*size.y);
 	sprite = new MultiSprite();
-	render = new Renderer ( "CataLixo", new Camera(), WINDOW_SIZE, WINDOW_SIZE );
+	render = new Renderer ( "CataLixo", new Camera(), WINDOW_SIZE, renderSize );
 	if(kbreader!=0){
         render->KeyBoardReader::addListener(kbreader);
 	}
 
-//    sprites=GuiFactory::getGroundTextures();
+
 	for ( int i = 0; i < size.x; i++ ) {
 		for ( int j = 0; j < size.y; j++ ) {
+            pg::DrawableSprite* ground=GuiFactory::createGroundTexture();
+           ground->getHitBox()->position= Coord ( i * SIZE_X, j * SIZE_Y );
+            sprite->add(ground);
+
 			sprite->add (
 			    new HollowShape (
 			        GuiFactory::createRect (
 			            Coord ( SIZE_X, SIZE_Y ),
 			            Coord ( i * SIZE_X, j * SIZE_Y )
 			        ),
-			        sf::Color::Blue, 5 )
+			        sf::Color::Black, 3 )
 			);
 		}
 	}
@@ -116,7 +122,7 @@ void GuiWorld::updateGraphicCoords()
 void GuiWorld::turn()
 {
 	updateGraphicCoords();
-	sf::sleep ( sf::milliseconds ( 250 ) );
+	sf::sleep ( sf::milliseconds ( sleeptime ) );
 	World::turn();
 
 }

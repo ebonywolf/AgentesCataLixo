@@ -12,8 +12,12 @@ class Robot
 	public:
 		friend World;
 
-		Robot() {}
+		Robot():_carrying(0),_world(0) {}
 		virtual ~Robot();
+
+
+        ///called once at the start
+		virtual void init(){}
 
 		///will get Called once every turn.
 		virtual void turn() {}

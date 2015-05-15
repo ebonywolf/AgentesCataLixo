@@ -5,7 +5,10 @@ using namespace pg;
 
 
 sf::Texture* GuiFactory::robot = 0;
+sf::Texture* GuiFactory::floor = 0;
 std::map<TrashTypes, sf::Color> GuiFactory::colorCodes = std::map<TrashTypes, sf::Color>();
+std::map<TrashTypes,sf::Texture*> GuiFactory::trashBin =  std::map<TrashTypes,sf::Texture*>();
+std::map<TrashTypes,pg::Coord> GuiFactory::trashBinPos= std::map<TrashTypes,pg::Coord>();
 
 GuiFactory::~GuiFactory()
 {
@@ -18,6 +21,14 @@ void GuiFactory::setColorCodes ()
 	colorCodes[TrashTypes::PLASTICO] = sf::Color::Red;
 	colorCodes[TrashTypes::VIDRO] = sf::Color::Green;
 	colorCodes[TrashTypes::TOXICO] = sf::Color::Yellow;
+
+	trashBinPos[TrashTypes::TOXICO] = Coord(0,0);
+	trashBinPos[TrashTypes::PLASTICO] = Coord(1,0);
+	trashBinPos[TrashTypes::PAPEL] = Coord(2,0);
+	trashBinPos[TrashTypes::VIDRO] = Coord(0,1);
+	trashBinPos[TrashTypes::ORGANICO] = Coord(1,1);
+
+
 }
 pg::DrawableSprite* GuiFactory::createTrashSprite ( TrashTypes type )
 {
@@ -30,22 +41,43 @@ pg::DrawableSprite* GuiFactory::createTrashSprite ( TrashTypes type )
 }
 pg::DrawableSprite* GuiFactory::createCanSprite ( TrashTypes t )
 {
-	int top = 15;
-	int bottom = 5;
-	int height = 30;
-	int offset = 5;
-	std::list<Coord> lista;
-	lista.push_back ( Coord ( 0 + bottom, offset ) );
-	lista.push_back ( Coord ( SIZE_X - bottom, offset ) );
-	lista.push_back ( Coord ( SIZE_X - top, offset + height ) );
-	lista.push_back ( Coord ( 0 + top, offset + height ) );
+	if(trashBin[t]==0){
+	    int Yoffset =33;
+	    int Xoffset =53;
+        int sizeX=209;
+        int sizeY=317;
+        int varX = 250;
+        int varY=345;
 
-	pg::DrawableSprite* novo = new ColoredShape ( lista, colorCodes[t] );
+        sf::Rect<int> rect=sf::Rect<int>( Xoffset + varX*trashBinPos[t].x, Yoffset+varY*trashBinPos[t].y,
+                              sizeX, sizeY);
 
+        trashBin[t] = new sf::Texture();
+		if ( !trashBin[t]->loadFromFile ( TRASH_BIN_PATH,rect ) ) {
+			std::cout << "unable to load" << TRASH_BIN_PATH;
+		}
+	}
+	pg::TexturedSprite* novo = new  pg::TexturedSprite ( trashBin[t], Coord() );
+
+	novo->getHitBox()->scale.x = 0.15;
+	novo->getHitBox()->scale.y = 0.15;
+
+	return novo;
+}
+
+DrawableSprite* GuiFactory::createGroundTexture(){
+    if ( floor == 0 ) {
+		floor = new sf::Texture();
+		if ( !floor->loadFromFile ( FLOOR_PATH ) ) {
+			std::cout << "unable to load" << FLOOR_PATH;
+		}
+	}
+	pg::TexturedSprite* novo = new  pg::TexturedSprite ( floor, Coord() );
+	novo->getHitBox()->scale.x = 0.5;
+	novo->getHitBox()->scale.y = 0.5;
 	return novo;
 
 }
-
 
 DrawableSprite*  GuiFactory::createRobotSprite()
 {
@@ -79,3 +111,21 @@ pg::Polygon GuiFactory::createRect ( pg::Coord dimension, pg::Coord position )
 	novo.position = position;
 	return novo;
 }
+
+/*
+pg::DrawableSprite* GuiFactory::createCanSprite ( TrashTypes t )
+{
+	int top = 15;
+	int bottom = 5;
+	int height = 30;
+	int offset = 5;
+	std::list<Coord> lista;
+	lista.push_back ( Coord ( 0 + bottom, offset ) );
+	lista.push_back ( Coord ( SIZE_X - bottom, offset ) );
+	lista.push_back ( Coord ( SIZE_X - top, offset + height ) );
+	lista.push_back ( Coord ( 0 + top, offset + height ) );
+
+	pg::DrawableSprite* novo = new ColoredShape ( lista, colorCodes[t] );
+
+	return novo;
+}*/

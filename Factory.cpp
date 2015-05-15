@@ -1,10 +1,13 @@
 #include "Factory.h"
 #include "Agents/Randy.h"
+#include "RobotAI.h"
+#include "BasicRobot.h"
 
 std::list<Robot*> Factory::createRobots()
 {
 //TODO :createRobots
 	std::list<Robot*> lista = std::list<Robot*>();
-	lista.push_back ( new Randy() );
+	//lista.push_back ( new RobotAI() );
+	lista.push_back(new BasicRobot(pg::Coord(5,5)));
 	return lista;
 }

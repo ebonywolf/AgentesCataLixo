@@ -15,6 +15,8 @@
 #define SIZE_Y 50
 #define WINDOW_SIZE pg::Coord(800,600)
 #define ROBOT_PATH "Img/Walle.png"
+#define FLOOR_PATH "Img/Floor.jpg"
+#define TRASH_BIN_PATH "Img/Lixeiras.png"
 class GuiFactory
 {
 	public:
@@ -25,14 +27,17 @@ class GuiFactory
 		static pg::DrawableSprite* createRobotSprite();
 		static pg::DrawableSprite* createTrashSprite ( TrashTypes );
 		static pg::DrawableSprite* createCanSprite ( TrashTypes );
-		static std::list<sf::Drawable*> getGroundTextures();
+		static pg::DrawableSprite* createGroundTexture();
 		static pg::Polygon createRect ( pg::Coord dimension, pg::Coord position );
 		virtual ~GuiFactory();
 
 		static std::map<TrashTypes, sf::Color> colorCodes;
 		static void setColorCodes();
 	protected:
+	    static std::map<TrashTypes,sf::Texture*> trashBin;
 		static sf::Texture* robot;
+		static sf::Texture* floor;
+		static std::map<TrashTypes,pg::Coord> trashBinPos;
 
 
 	private:
