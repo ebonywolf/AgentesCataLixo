@@ -1,10 +1,10 @@
 #include <iostream>
 #include <ProjGaia/SFML/Renderer.h>
-#include "GuiWorld.h"
+#include "Gui/GuiWorld.h"
 #include <ProjGaia/SFML/ColoredShape.h>
 #include <ProjGaia/SFML/HollowShape.h>
 #include <ProjGaia/Tools/Polygon.h>
-#include "GuiFactory.h"
+#include "Gui/GuiFactory.h"
 #include <list>
 #include <ProjGaia/Tools/Coord.h>
 #include <ProjGaia/Tools/HitBox.h>
