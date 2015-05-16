@@ -1,9 +1,9 @@
 #include <iostream>
-#include "GuiWorld.h"
-#include "GuiFactory.h"
+#include "Gui/GuiWorld.h"
+#include "Gui/GuiFactory.h"
 #include <list>
 #include "Factory.h"
-#include "Control.h"
+#include "Agents/Control.h"
 #include <map>
 using namespace std;
 using namespace pg;

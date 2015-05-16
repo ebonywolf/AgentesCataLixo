@@ -1,7 +1,7 @@
 #include "Factory.h"
 #include "Agents/Randy.h"
-#include "RobotAI.h"
-#include "BasicRobot.h"
+#include "Agents/RobotAI.h"
+#include "Agents/BasicRobot.h"
 
 std::list<Robot*> Factory::createRobots()
 {
