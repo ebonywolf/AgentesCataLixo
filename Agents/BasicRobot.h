@@ -23,12 +23,14 @@ class BasicRobot: public Robot
 	    pg::Coord getClosestLeftOver();
 
 		pg::Coord getUnexplored();
-		std::vector<std::vector<bool>> explored;
+
 		std::list<pg::Coord> leftOvers;
 		void  moveToxy ( pg::Coord );
 		pg::Coord objective;
 		State state;
 		bool doingSomething = false;
+
+		static std::vector<std::vector<bool>> explored;
 
 
 	private:

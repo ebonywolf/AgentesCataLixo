@@ -9,5 +9,6 @@ std::list<Robot*> Factory::createRobots()
 	std::list<Robot*> lista = std::list<Robot*>();
 	//lista.push_back ( new RobotAI() );
 	lista.push_back(new BasicRobot(pg::Coord(5,5)));
+	lista.push_back(new BasicRobot());
 	return lista;
 }

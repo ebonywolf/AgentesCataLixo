@@ -7,6 +7,7 @@
 
 using namespace std;
 using namespace pg;
+ std::vector<std::vector<bool>> BasicRobot::explored=std::vector<std::vector<bool>>();
 BasicRobot::BasicRobot ( pg::Coord c ) : objective ( c )
 {
 	//ctor
