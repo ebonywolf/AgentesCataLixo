@@ -48,7 +48,7 @@ Coord BasicRobot::getUnexplored()
 			return vetor[0];
 		}
 	}
-	std::cout << "Fuuuuuu" << std::endl;
+
 
 
 

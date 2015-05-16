@@ -8,7 +8,7 @@ class Factory
 	public:
 
 		static std::list<Trash> createThrash ( int mapWidth, int mapHeight );
-		static std::list<Robot*> createRobots();
+		static std::list<Robot*> createRobots(int roboquant=1);
 	protected:
 	private:
 };
