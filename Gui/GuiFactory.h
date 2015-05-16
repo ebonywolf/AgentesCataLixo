@@ -33,7 +33,9 @@ class GuiFactory
 
 		static std::map<TrashTypes, sf::Color> colorCodes;
 		static void setColorCodes();
+		static pg::Renderer* debugDraw;
 	protected:
+
 	    static std::map<TrashTypes,sf::Texture*> trashBin;
 		static sf::Texture* robot;
 		static sf::Texture* floor;

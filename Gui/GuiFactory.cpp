@@ -1,11 +1,13 @@
 #include "GuiFactory.h"
 #include <ProjGaia/SFML/TexturedSprite.h>
 #include <ProjGaia/SFML/ColoredShape.h>
+#include <ProjGaia/SFML/Renderer.h>
 using namespace pg;
 
 
 sf::Texture* GuiFactory::robot = 0;
 sf::Texture* GuiFactory::floor = 0;
+Renderer* GuiFactory::debugDraw=0;
 std::map<TrashTypes, sf::Color> GuiFactory::colorCodes = std::map<TrashTypes, sf::Color>();
 std::map<TrashTypes,sf::Texture*> GuiFactory::trashBin =  std::map<TrashTypes,sf::Texture*>();
 std::map<TrashTypes,pg::Coord> GuiFactory::trashBinPos= std::map<TrashTypes,pg::Coord>();

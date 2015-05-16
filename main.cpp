@@ -12,16 +12,21 @@ using namespace pg;
 int main()
 
 {
-    map<string,int> test;
-    cout<<test["hi"];
+
 
 	GuiFactory::setColorCodes();
-
 	srand ( time ( 0 ) );
-
 	std::list<Robot*> robo =Factory::createRobots();
+	cout<<"digite o tamanho x e y do mapa (recomenda-se 15)"<<endl;
+	int x=20,y=15;
+	cin>>x>>y;
+	std::cout<< "digite a quantidade de lixo espalhado no mapa" <<std::endl;
+	int quant=20 ;
+	cin>>quant;
 
-	World* world = new GuiWorld ( robo, Coord ( 10, 10 ),25,200 );
+
+
+	World* world = new GuiWorld ( robo, Coord ( x, y ),quant,150 );
 	world->begin();
 
 

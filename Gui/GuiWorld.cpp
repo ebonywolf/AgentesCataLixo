@@ -20,6 +20,7 @@ GuiWorld::GuiWorld ( std::list<Robot*> robots, pg::Coord size,int trashNum,int s
 	if(kbreader!=0){
         render->KeyBoardReader::addListener(kbreader);
 	}
+	GuiFactory::debugDraw=render;
 
 
 	for ( int i = 0; i < size.x; i++ ) {
