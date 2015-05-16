@@ -7,6 +7,21 @@
 class World;
 class Trash;
 class TrashCan;
+
+/** IMPLEMENTATION TIPS, MUST READ
+
+ * after calling pick up trash command, you will only be carrying said trash on the next turn
+ * and only if you dont overwrite that command with another command.
+
+ * you cannot move and interact with the trash on the same turn. you will likely get
+ * a segmentation fault error if you try.
+
+ *
+ */
+
+
+
+
 class Robot
 {
 	public:
@@ -30,7 +45,7 @@ class Robot
 		int getMapWidth();
 		int getMapHeight();
 
-		/**< Returns the thrash the robot is currently carrying */
+		/**< Returns the thrash the robot is currently carrying, returns 0 if you are not */
 		const Trash* getCarryingTrash();
 
 		/**< returns the coordenate to the thrashcan of type */

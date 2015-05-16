@@ -1,8 +1,5 @@
 #include "BasicRobot.h"
-
 #include "Trash.h"
-
-
 #include <cmath>
 
 using namespace std;
@@ -48,35 +45,8 @@ Coord BasicRobot::getUnexplored()
 			return vetor[0];
 		}
 	}
-
-
-
-
 }
-Coord BasicRobot::getClosestLeftOver(){
-    std::list<Coord> toDelete =  std::list<Coord>();
-    for(auto l: leftOvers){
-            if(explored[l.x][l.y]==1)
-                toDelete.push_back(l);
-    }
-    for(auto x: toDelete){
-            leftOvers.remove(x);
-    }
 
-
-
-    auto dist= [](Coord a, Coord b){
-        return (abs ( a.x - b.x ) + abs ( a.x - b.x ));
-    };
-    Coord closest = leftOvers.front();
-    Coord pos=getPosition();
-    for(auto x: leftOvers){
-            if( dist(closest,pos)> dist(x,pos)  )
-            closest=x;
-    }
-    return closest;
-
-}
 void BasicRobot::init()
 {
 
@@ -117,19 +87,14 @@ void BasicRobot::turn()
 		}
 	}
 	if ( state == EXPLORING ) { ///se estiver explorando, procure proximo lugar não explorado
-
         /*
 		if(leftOvers.size()>0){
                 ///trash it finds while carrying other trash
-
                 objective=getClosestLeftOver();
 		}else{
-
 		}
 		*/
 		 objective = getUnexplored();
-
-
 
 	}
 
@@ -144,17 +109,18 @@ void BasicRobot::turn()
 		}
 	}
 
-
 	moveToxy ( objective );
 }
+
 bool BasicRobot::priorityTrash ( Trash * trash )
 {
 	if ( trash->type <= 3 ) { return false; } ///lixo reciclavel não prioriza outro reciclavel
-
 	if ( getCarryingTrash()->type < trash->type ) { return true; }
 	return false;
 
 }
+
+
 void BasicRobot::pickTrash()
 {
 	interactThrash();
@@ -164,7 +130,7 @@ void BasicRobot::pickTrash()
 
 }
 
-
+///move robot to coordenate
 void  BasicRobot::moveToxy ( pg::Coord desti )
 {
 	if ( doingSomething ) { return; }
@@ -185,6 +151,26 @@ void  BasicRobot::moveToxy ( pg::Coord desti )
 		}
 	}
 }
+Coord BasicRobot::getClosestLeftOver(){
+    std::list<Coord> toDelete =  std::list<Coord>();
+    for(auto l: leftOvers){
+            if(explored[l.x][l.y]==1)
+                toDelete.push_back(l);
+    }
+    for(auto x: toDelete){
+            leftOvers.remove(x);
+    }
+    auto dist= [](Coord a, Coord b){
+        return (abs ( a.x - b.x ) + abs ( a.x - b.x ));
+    };
+    Coord closest = leftOvers.front();
+    Coord pos=getPosition();
+    for(auto x: leftOvers){
+            if( dist(closest,pos)> dist(x,pos)  )
+            closest=x;
+    }
+    return closest;
 
+}
 
 
