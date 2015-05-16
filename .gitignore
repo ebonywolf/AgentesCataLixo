@@ -8,3 +8,5 @@
 *.cbp
 *.dropbox
 *.depend
+*.dep.mk
+*.swp
