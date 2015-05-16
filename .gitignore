@@ -10,3 +10,4 @@
 *.depend
 *.dep.mk
 *.swp
+main
