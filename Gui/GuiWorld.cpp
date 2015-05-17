@@ -57,9 +57,11 @@ void GuiWorld::ini()
 	for ( auto x : robots ) {
 		render->addDrawable ( drawableRobot[x] );
 	}
+	trash.reverse();
 	for ( auto x : trash ) {
 		render->addDrawable ( drawableTrash[x] );
 	}
+	trash.reverse();
 	render->beginAssync();
 
 }
