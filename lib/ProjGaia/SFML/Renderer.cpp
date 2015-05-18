@@ -240,7 +240,7 @@ namespace pg
 		//std::cout<<view.getCenter().x<<std::endl;
 
 		for ( DrawableType * type : sprites ) {
-			DrawableSprite* s = ( DrawableSprite* ) type->getSprite();
+			DrawableSprite* s = dynamic_cast<DrawableSprite*>(type->getSprite());
 			if ( s != 0 ) {
 				s->update ( 0 );
 				window->draw ( *s );
